@@ -84,4 +84,59 @@ fn main() {
             current_image.save(format!("regular_samples_{}.png", &sample_count));
         }
     }
+
+    // blue noise
+    {
+        let blue_noise_sample_multiplier = 1;
+        for sample_count in samples.iter() {
+            let mut current_image = Image::new(image_size, image_size);
+
+            let mut samples_pos: Vec<(u32, u32)> = Vec::with_capacity(*sample_count);
+
+            for _ in 0..sample_count.clone() {
+                // create n points
+                let num_candidates = &samples_pos.len() * blue_noise_sample_multiplier + 1;
+                let mut best_distance = 0;
+                let mut best_candidate_x = 0;
+                let mut best_candidate_y = 0;
+
+                for _ in 0..num_candidates {
+                    // generate candidates
+                    let x = die.sample(&mut rng);
+                    let y = die.sample(&mut rng);
+                    let mut min_dist: i32 = i32::MAX;
+
+                    for item in &samples_pos {
+                        let dist = distance(
+                            x as i32,
+                            y as i32,
+                            item.0 as i32,
+                            item.1 as i32,
+                            current_image.imgbuf.width() as i32,
+                        );
+                        if dist < min_dist {
+                            min_dist = dist;
+                        }
+                    }
+
+                    if min_dist > best_distance {
+                        best_distance = min_dist;
+                        best_candidate_x = x;
+                        best_candidate_y = y;
+                    }
+                }
+                samples_pos.push((best_candidate_x, best_candidate_y));
+            }
+
+            for pos in samples_pos {
+                let x = pos.0;
+                let y = pos.1;
+
+                let current_pixel = current_image.imgbuf.get_pixel_mut(x, y);
+                *current_pixel = white_pixel.clone();
+            }
+
+            current_image.save(format!("blue_noise_samples_{}.png", sample_count));
+        }
+    }
 }
