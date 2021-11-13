@@ -58,7 +58,7 @@ fn main() {
 
                 *current_pixel = white_pixel.clone()
             }
-            current_image.save(format!("with_noise_samples_{}.png", &sample_count));
+            current_image.save(format!("white_noise_samples_{}.png", &sample_count));
         }
     }
 
