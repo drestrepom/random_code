@@ -62,4 +62,26 @@ fn main() {
         }
     }
 
+    // regular samples
+    {
+        for sample_count in samples.iter() {
+            let mut current_image = Image::new(image_size, image_size);
+
+            let side = (*sample_count as f32).sqrt();
+            let pixels = image_size as f32 / side;
+
+            for y in 0..side as i32 {
+                let pixel_y = y as f32 * pixels;
+                for x in 0..side as i32 {
+                    let pixel_x = x as f32 * pixels;
+
+                    let current_pixel = current_image
+                        .imgbuf
+                        .get_pixel_mut(pixel_x as u32, pixel_y as u32);
+                    *current_pixel = white_pixel.clone();
+                }
+            }
+            current_image.save(format!("regular_samples_{}.png", &sample_count));
+        }
+    }
 }
