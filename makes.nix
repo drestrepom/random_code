@@ -1,0 +1,7 @@
+{
+  lintMarkdown = {
+    all = {
+      targets = [ "/" ];
+    };
+  };
+}
