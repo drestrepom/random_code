@@ -1,4 +1,5 @@
 extern crate image;
+use image::{GenericImageView, Pixel};
 use rand::distributions::{Distribution, Uniform};
 
 fn distance(x_1: i32, y_1: i32, x_2: i32, y_2: i32, image_width: i32) -> i32 {
@@ -42,23 +43,29 @@ fn main() {
     let mut rng = rand::thread_rng();
     let die = Uniform::from(0..image_size - 1);
 
-    let samples = [];
+    let samples = [256, 1024, 4096];
 
     let white_pixel = image::Rgb([255, 255, 255]);
+
+    let sample_image = image::open("sample_image.png").unwrap();
 
     // with noise
     {
         for sample_count in samples.iter() {
             let mut current_image = Image::new(image_size, image_size);
+            let mut current_image_sample = Image::new(image_size, image_size);
 
             for _ in 1..sample_count.clone() {
                 let x = die.sample(&mut rng);
                 let y = die.sample(&mut rng);
                 let current_pixel = current_image.imgbuf.get_pixel_mut(x, y);
+                let sample_pixel = current_image_sample.imgbuf.get_pixel_mut(x, y);
 
-                *current_pixel = white_pixel.clone()
+                *current_pixel = white_pixel.clone();
+                *sample_pixel = Pixel::to_rgb(&sample_image.get_pixel(x, y));
             }
-            current_image.save(format!("white_noise_samples_{}.png", &sample_count));
+            current_image.save(format!("white_noise_{}.png", &sample_count));
+            current_image_sample.save(format!("white_noise_samples_{}.png", &sample_count));
         }
     }
 
@@ -66,6 +73,7 @@ fn main() {
     {
         for sample_count in samples.iter() {
             let mut current_image = Image::new(image_size, image_size);
+            let mut current_image_sample = Image::new(image_size, image_size);
 
             let side = (*sample_count as f32).sqrt();
             let pixels = image_size as f32 / side;
@@ -78,10 +86,17 @@ fn main() {
                     let current_pixel = current_image
                         .imgbuf
                         .get_pixel_mut(pixel_x as u32, pixel_y as u32);
+                    let sample_pixel = current_image_sample
+                        .imgbuf
+                        .get_pixel_mut(pixel_x as u32, pixel_y as u32);
+
                     *current_pixel = white_pixel.clone();
+                    *sample_pixel =
+                        Pixel::to_rgb(&sample_image.get_pixel(pixel_x as u32, pixel_y as u32));
                 }
             }
-            current_image.save(format!("regular_samples_{}.png", &sample_count));
+            current_image.save(format!("regular_{}.png", &sample_count));
+            current_image_sample.save(format!("regular_samples_{}.png", &sample_count));
         }
     }
 
@@ -90,6 +105,7 @@ fn main() {
         let blue_noise_sample_multiplier = 1;
         for sample_count in samples.iter() {
             let mut current_image = Image::new(image_size, image_size);
+            let mut current_image_sample = Image::new(image_size, image_size);
 
             let mut samples_pos: Vec<(u32, u32)> = Vec::with_capacity(*sample_count);
 
@@ -133,10 +149,14 @@ fn main() {
                 let y = pos.1;
 
                 let current_pixel = current_image.imgbuf.get_pixel_mut(x, y);
+                let sample_pixel = current_image_sample.imgbuf.get_pixel_mut(x, y);
+
                 *current_pixel = white_pixel.clone();
+                *sample_pixel = Pixel::to_rgb(&sample_image.get_pixel(x, y));
             }
 
-            current_image.save(format!("blue_noise_samples_{}.png", sample_count));
+            current_image.save(format!("blue_noise_{}.png", sample_count));
+            current_image_sample.save(format!("blue_noise_samples_{}.png", &sample_count));
         }
     }
 }
