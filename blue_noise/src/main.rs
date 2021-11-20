@@ -47,7 +47,7 @@ fn main() {
 
     let white_pixel = image::Rgb([255, 255, 255]);
 
-    let sample_image = image::open("sample_image.png").unwrap();
+    let sample_image = image::open("images/sample_image.png").unwrap();
 
     // with noise
     {
@@ -64,8 +64,8 @@ fn main() {
                 *current_pixel = white_pixel.clone();
                 *sample_pixel = Pixel::to_rgb(&sample_image.get_pixel(x, y));
             }
-            current_image.save(format!("white_noise_{}.png", &sample_count));
-            current_image_sample.save(format!("white_noise_samples_{}.png", &sample_count));
+            current_image.save(format!("images/white_noise_{}.png", &sample_count));
+            current_image_sample.save(format!("images/white_noise_samples_{}.png", &sample_count));
         }
     }
 
@@ -95,8 +95,8 @@ fn main() {
                         Pixel::to_rgb(&sample_image.get_pixel(pixel_x as u32, pixel_y as u32));
                 }
             }
-            current_image.save(format!("regular_{}.png", &sample_count));
-            current_image_sample.save(format!("regular_samples_{}.png", &sample_count));
+            current_image.save(format!("images/regular_{}.png", &sample_count));
+            current_image_sample.save(format!("images/regular_samples_{}.png", &sample_count));
         }
     }
 
@@ -155,8 +155,8 @@ fn main() {
                 *sample_pixel = Pixel::to_rgb(&sample_image.get_pixel(x, y));
             }
 
-            current_image.save(format!("blue_noise_{}.png", sample_count));
-            current_image_sample.save(format!("blue_noise_samples_{}.png", &sample_count));
+            current_image.save(format!("images/blue_noise_{}.png", sample_count));
+            current_image_sample.save(format!("images/blue_noise_samples_{}.png", &sample_count));
         }
     }
 }

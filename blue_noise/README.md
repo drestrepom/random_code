@@ -25,20 +25,20 @@ more practicable and more economical in the time it takes.
 
 Here are 256, 1024 and 4096 samples:
 
-![image](regular_256.png)
+![image](images/regular_256.png)
 
-![image](regular_1024.png)
+![image](images/regular_1024.png)
 
-![image](regular_4096.png)
+![image](images/regular_4096.png)
 
 
 Here are those samples taken from a source image:
 
-![image](regular_samples_256.png)
+![image](images/regular_samples_256.png)
 
-![image](regular_samples_1024.png)
+![image](images/regular_samples_1024.png)
 
-![image](regular_samples_4096.png)
+![image](images/regular_samples_4096.png)
 
 ## White Noise Sampling
 
@@ -53,19 +53,19 @@ sampling.
 
 Here are 256, 1024 and 4096 samples:
 
-![image](white_noise_256.png)
+![image](images/white_noise_256.png)
 
-![image](white_noise_1024.png)
+![image](images/white_noise_1024.png)
 
-![image](white_noise_4096.png)
+![image](images/white_noise_4096.png)
 
 Here are those samples taken from a source image:
 
-![image](white_noise_samples_256.png)
+![image](images/white_noise_samples_256.png)
 
-![image](white_noise_samples_1024.png)
+![image](images/white_noise_samples_1024.png)
 
-![image](white_noise_samples_4096.png)
+![image](images/white_noise_samples_4096.png)
 
 ## Blue Noise Sampling
 
@@ -75,19 +75,19 @@ white noise sampling, but the points are approximately the same distance apart.
 
 Here are 256, 1024 and 4096 samples:
 
-![image](blue_noise_256.png)
+![image](images/blue_noise_256.png)
 
-![image](blue_noise_1024.png)
+![image](images/blue_noise_1024.png)
 
-![image](blue_noise_4096.png)
+![image](images/blue_noise_4096.png)
 
 Here are those samples taken from a source image:
 
-![image](blue_noise_samples_256.png)
+![image](images/blue_noise_samples_256.png)
 
-![image](blue_noise_samples_1024.png)
+![image](images/blue_noise_samples_1024.png)
 
-![image](blue_noise_samples_4096.png)
+![image](images/blue_noise_samples_4096.png)
 
 
 # Comparison
@@ -96,11 +96,11 @@ Imagine you were a robot with 4096 light/color sensors. Which of the following
 images provides a better picture of reality?.
 
 
-![image](regular_samples_4096.png)
+![image](images/regular_samples_4096.png)
 
-![image](white_noise_samples_4096.png)
+![image](images/white_noise_samples_4096.png)
 
-![image](blue_noise_samples_4096.png)
+![image](images/blue_noise_samples_4096.png)
 
 The best versions are regular sampling and blue noise, white noise presents
 a very distorted picture of reality .
@@ -113,7 +113,7 @@ easier to see the true shape of non straight things.
 
 Here is the real image:
 
-![image](sample_image.png)
+![image](images/sample_image.png)
 
 
 Obviously, the photoreceptors in our eyes are located in the form of blue
